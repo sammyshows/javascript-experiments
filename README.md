@@ -3,17 +3,15 @@
 This script demonstrates the timing differences between synchronous tasks, microtasks, and macrotasks in JavaScript.
 
 ## Parameters
+- **iterations:** 1,000,000 each / task type (synchronous, promise, setTimeout)
 
-- **fib:** 2
-- **iterations:** 1,000,000
-
-## Results (without `addWorkHalfWay`)
+## Results
 
 - **synchronous timer:** 25.273ms
 - **microtask timer:** 62.708ms
 - **macrotask timer:** 124.649ms
 
-### Timer Breakdown:
+### Time to execute tasks:
 
 - **synchronous:** 25.273ms
 - **microtask:** 37.435ms (62.708ms - 25.273ms)
@@ -30,13 +28,13 @@ This script demonstrates the timing differences between synchronous tasks, micro
 - Microtasks run in a single tick, while macrotasks run across multiple ticks.
 - For example, executing 1 million microtasks in one tick and 1 million macrotasks across 1 million ticks results in just a 24ms difference—demonstrating the efficiency of microtasks.
 
-## Why Do Microtasks Run in Different Ticks?
+## Why Do Macrotasks Run in Different Ticks?
 
 Macrotasks are designed for less time-sensitive operations like I/O, network requests, etc. This allows synchronous tasks to be added to the call stack and prioritized over macrotasks, while microtasks are prioritized as they are more time-sensitive.
 
-### Testing with `addWorkHalfWay` Enabled
+### Testing #2 - Add 3 million microtasks just before macrotasks finish executing
 
-Enabling the `addWorkHalfWay` flag and running the script again reveals that the second microtask timer runs after the macrotask timer, even though it was added later. This happens because microtasks are prioritized over macrotasks.
+Enabling the `addWorkHalfWay` flag and running the script again reveals that the second microtask timer runs after the macrotask timer, even though it was added later. This happens because microtasks are prioritised over macrotasks.
 
 ## Results (with `addWorkHalfWay`):
 
